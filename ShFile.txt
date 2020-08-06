@@ -1,0 +1,12 @@
+ $folder = 'C:\scripts' # Enter the root path you want to monitor. 
+ $filter = '*.*'  # You can enter a wildcard filter here. 
+
+ $fsw = New-Object IO.FileSystemWatcher $folder, $filter -Property  @{IncludeSubdirectories = $false;NotifyFilter = [IO.NotifyFilters]'FileName, LastWrite'}
+
+ Register-ObjectEvent $fsw Created -SourceIdentifier FileCreated -Action { 
+ $name = $Event.SourceEventArgs.Name 
+ $changeType = $Event.SourceEventArgs.ChangeType 
+ $timeStamp = $Event.TimeGenerated 
+ Write-Host "The file '$name' was $changeType at $timeStamp" -fore green 
+ cmd.exe /c 'C:\scripts\batfile.bat'
+ }
