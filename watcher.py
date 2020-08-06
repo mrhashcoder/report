@@ -25,23 +25,15 @@ class Watcher:
 
 class Handler(FileSystemEventHandler):
     @staticmethod
-    def on_any_event(event):
+    def on_created(event):
         if event.is_directory:
             return None
         elif event.event_type == "created":
             os.system('git add .')
             os.system('git commit -m "report"')
             os.system('git push')
-            print("done")
-            
-
-    @staticmethod
-    def on_deleted(event):
-        print("file deleted")
-
-    @staticmethod
-    def on_moved(event):
-        print("moved a file")    
+            print("done")            
+   
 
 if __name__ == '__main__':
     w = Watcher()
