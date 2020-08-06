@@ -3,6 +3,8 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import os
 
+path = "C:\\Users\\abhis\\Desktop\\report\\"
+
 class Watcher:
     DIRECTORY_TO_WATCH = "C:\\Users\\abhis\\Desktop\\report\\"
 
@@ -28,6 +30,8 @@ class Handler(FileSystemEventHandler):
     
     @staticmethod
     def on_created(event):
+        if(event.src_path == path + ".git"):
+            return
         print(event)
         os.system('git add .')
         os.system('git commit -m "report"')
