@@ -4,7 +4,7 @@ from watchdog.events import FileSystemEventHandler
 import os
 
 class Watcher:
-    DIRECTORY_TO_WATCH = "C:\\Users\\abhis\\Desktop\\report"
+    DIRECTORY_TO_WATCH = "C:\\Users\\abhis\\Desktop\\report\\"
 
     def __init__(self):
         self.observer = Observer()
@@ -25,14 +25,11 @@ class Watcher:
 
 class Handler(FileSystemEventHandler):
     @staticmethod
-    def on_created(event):
-        if event.is_directory:
-            return None
-        elif event.event_type == "created":
-            os.system('git add .')
-            os.system('git commit -m "report"')
-            os.system('git push')
-            print("done")            
+    def on_modified(event):
+        os.system('git add .')
+        os.system('git commit -m "report"')
+        os.system('git push')
+        print("done")            
    
 
 if __name__ == '__main__':
