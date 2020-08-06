@@ -28,7 +28,7 @@ class Handler(FileSystemEventHandler):
     def on_any_event(event):
         if event.is_directory:
             return None
-        else:
+        elif event.event_type == "created":
             os.system('git add .')
             os.system('git commit -m "report"')
             os.system('git push')
