@@ -30,7 +30,7 @@ class Handler(FileSystemEventHandler):
     
     @staticmethod
     def on_created(event):
-        if(str):
+        if(str(event.src_path).find()):
             return
         print(event)
         os.system('git add .')
