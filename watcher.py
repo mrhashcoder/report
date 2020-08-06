@@ -24,9 +24,11 @@ class Watcher:
 
 
 class Handler(FileSystemEventHandler):
+
     
     @staticmethod
     def on_created(event):
+        print(event)
         os.system('git add .')
         os.system('git commit -m "report"')
         os.system('git push')       
